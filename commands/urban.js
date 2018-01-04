@@ -20,5 +20,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   command: "urban",
-  alias: "urbandictionary"
+  alias: "urbandictionary",
+  description: "Know now the meaning of a word on Urban Dictionary!"
 }

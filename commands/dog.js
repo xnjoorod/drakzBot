@@ -13,5 +13,6 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
   command: "dog",
-  alias: "cão"
+  alias: "cão",
+  description: "Type this and I'll offer you a free dog!"
 }

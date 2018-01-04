@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.config = {
-  command: "estado",
-  alias: "status",
+  command: "status",
+  alias: "estado",
   description: "Get to know more about my mentally virtual status!"
 }

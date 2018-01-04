@@ -3,5 +3,6 @@ module.exports.run = async (bot, message, args) => {
 }
 
 module.exports.config = {
-  command: "botinfo"
+  command: "botinfo",
+  description: "Know more about me ;)"
 }

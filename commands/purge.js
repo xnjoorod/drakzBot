@@ -1,5 +1,5 @@
 module.exports.run = async (bot, message, args) => {
-  async function limpar() {
+  async function purge() {
     message.delete();
     if(!message.member.roles.find("name","bots") && (!message.member.roles.find("name","moderators") && !message.member.roles.find("name","ADMIN"))) {
       message.channel.send('Privilégios insuficientes.');
@@ -18,10 +18,11 @@ module.exports.run = async (bot, message, args) => {
       .catch(error => message.channel.send('Error: ${error}'));
   }
 
-  limpar();
+  purge();
 }
 
 module.exports.config = {
-  command: "limpar",
-  alias: "clear"
+  command: "purge",
+  alias: "limpar",
+  description: "Este comando serve para limpar conteúdo do chat em **N** linhas"
 }
