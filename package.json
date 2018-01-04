@@ -1,0 +1,16 @@
+{
+  "name": "drakzbot",
+  "version": "0.9.5",
+  "description": "drakzBot, your personal Discord bot!",
+  "main": "bot.js",
+  "author": "www.drakz.pt",
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "snekfetch": "^3.6.1",
+    "twitch-api-v5": "^2.0.2",
+    "urban": "^0.3.1",
+    "weather-js": "^2.0.0",
+    "winston": "^2.4.0"
+  }
+}
