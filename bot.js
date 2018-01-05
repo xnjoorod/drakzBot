@@ -4,9 +4,8 @@ let fs = require('fs');
 let auth = require('./auth.json');
 let config = require('./config.json');
 
-let streamerName = ['pedropcruz', 'drakzOfficial', 'ExilePT'];
-let live = {'pedropcruz':0, 'drakzOfficial':0, 'ExilePT':0};
-let streamerMessage = [];
+let streamers;
+let live = {"pedropcruz": 0, "drakzofficial": 0, "exilept": 0}; // pending automation
 
 let bot = new Discord.Client();
 let NOTIFY_CHANNEL;
@@ -32,6 +31,8 @@ bot.login(auth.token);
 bot.on('ready', () => {
   console.log(`Connected!\nLogged in as ${bot.user.tag}!`);
   bot.user.setGame("www.drakz.pt");
+
+  streamers = config.streamers;
   // Check if Twitch channels are online.
   if(config.twitch_enabled && auth.twitch_clientId !== '' && config.channel_announces !== 0){
     NOTIFY_CHANNEL = bot.channels.find('id', config.channel_announces);
@@ -63,7 +64,7 @@ bot.on('message', message => {
 });
 
 function checkTwitchStreams() {
-  streamerName.forEach((name) => {
+  streamers.forEach((name) => {
     https.get('https://api.twitch.tv/kraken/streams/' + name + '?client_id=' + auth.twitch_clientId, function(res) {
       let body = '';
 
