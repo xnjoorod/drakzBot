@@ -3,18 +3,5 @@
   "twitch_enabled": true,
   "twitch_checktime": 10,
   "channel_announces": "393049570218868738",
-  "streamers": [
-    {
-      "streamerId": 31173723,
-      "streamerName": "pedropcruz"
-    },
-    {
-      "streamerId": 53000452,
-      "streamerName": "drakzofficial"
-    },
-    {
-      "streamerId": 25942107,
-      "streamerName": "ExilePT"
-    }
-  ]
+  "streamers": ["pedropcruz","drakzofficial","ExilePT"]
 }

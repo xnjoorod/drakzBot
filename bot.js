@@ -4,7 +4,7 @@ let fs = require('fs');
 let auth = require('./auth.json');
 let config = require('./config.json');
 
-const SUPPORTED_STREAMERS = ['pedropcruz', 'drakzOfficial', 'ExilePT'];
+const SUPPORTED_STREAMERS = config.streamers;
 
 let live = {
   pedropcruz: 0, 
@@ -29,9 +29,6 @@ fs.readdir('./commands/', (err, files) => {
     let cmds = require(`./commands/${f}`);
     console.log(`Command ${f} loaded.`);
     bot.commands.set(cmds.config.command, cmds);
-    if(cmds.config.alias) { 
-      bot.commands.set(cmds.config.alias, cmds); 
-    }
   });
 });
 
@@ -39,8 +36,9 @@ bot.login(auth.token);
 bot.on('ready', () => {
   console.log(`Connected!\nLogged in as ${bot.user.tag}!`);
   bot.user.setGame("www.drakz.pt");
+
   const twitchOnline = config.twitch_enabled && auth.twitch_clientId !== '';
-  if(twitchChannelOnline && config.channel_announces !== 0){
+  if(twitchOnline && config.channel_announces !== 0){
     const announce_channel = bot.channels.find('id', config.channel_announces);
     setInterval(
       () => { live = twitch.checkTwitchStreams(SUPPORTED_STREAMERS, announce_channel, live); }, 
