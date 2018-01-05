@@ -24,7 +24,6 @@ fs.readdir('./commands/', (err, files) => {
     let cmds = require(`./commands/${f}`);
     console.log(`Command ${f} loaded.`);
     bot.commands.set(cmds.config.command, cmds);
-    if(cmds.config.alias){ bot.commands.set(cmds.config.alias, cmds); }
   });
 });
 
