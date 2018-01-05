@@ -1,4 +1,6 @@
+const Discord = require("discord.js");
 const https = require('https');
+let auth = require('./auth.json');
 
 function checkTwitchStreams(streamers, channel, liveStatus) {
     streamers.forEach((name) => {
@@ -29,6 +31,7 @@ function checkTwitchStreams(streamers, channel, liveStatus) {
       })
         .on('error', e => console.log("Erro: ", e.message));
     });
+    return liveStatus;
   }
 
   module.exports.checkTwitchStreams = checkTwitchStreams;

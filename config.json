@@ -2,6 +2,6 @@
   "command_prefix": "d!",
   "twitch_enabled": true,
   "twitch_checktime": 10,
-  "channel_announces": "393049570218868738",
+  "channel_announces": "393375063258169354",
   "streamers": ["pedropcruz","drakzofficial","ExilePT"]
 }
