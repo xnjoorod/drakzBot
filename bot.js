@@ -14,6 +14,7 @@ let live = {
 
 let bot = new Discord.Client();
 bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
 
 fs.readdir('./commands/', (err, files) => {
     if (err) console.error(err);
@@ -29,6 +30,7 @@ fs.readdir('./commands/', (err, files) => {
         let cmds = require(`./commands/${f}`);
         console.log(`Command ${f} loaded.`);
         bot.commands.set(cmds.config.command, cmds);
+        bot.aliases.set(cmds.config.alias, cmds);
     });
 });
 
@@ -68,6 +70,11 @@ bot.on('message', message => {
 
     if (!msg.startsWith(prefix)) return;
 
-    let cmd = bot.commands.get(cont[0]);
+    let cmd;
+    if(bot.commands.has(cont[0]))
+        cmd = bot.commands.get(cont[0]);
+    else if(bot.aliases.has(cont[0]))
+        cmd = bot.aliases.get(cont[0]);
+
     if (cmd) cmd.run(bot, message, args);
 });
