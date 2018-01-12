@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="def64a32-3a27-4dd1-9dd9-97477a6b87af" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/bot.js" afterPath="$PROJECT_DIR$/bot.js" />
-      <change beforePath="$PROJECT_DIR$/commands/botinfo.js" afterPath="$PROJECT_DIR$/commands/botinfo.js" />
-      <change beforePath="$PROJECT_DIR$/commands/cat.js" afterPath="$PROJECT_DIR$/commands/cat.js" />
-      <change beforePath="$PROJECT_DIR$/commands/dog.js" afterPath="$PROJECT_DIR$/commands/dog.js" />
-      <change beforePath="$PROJECT_DIR$/commands/help.js" afterPath="$PROJECT_DIR$/commands/help.js" />
-      <change beforePath="$PROJECT_DIR$/commands/ping.js" afterPath="$PROJECT_DIR$/commands/ping.js" />
-      <change beforePath="$PROJECT_DIR$/commands/purge.js" afterPath="$PROJECT_DIR$/commands/purge.js" />
-      <change beforePath="$PROJECT_DIR$/commands/status.js" afterPath="$PROJECT_DIR$/commands/status.js" />
-      <change beforePath="$PROJECT_DIR$/commands/urban.js" afterPath="$PROJECT_DIR$/commands/urban.js" />
-      <change beforePath="$PROJECT_DIR$/commands/weather.js" afterPath="$PROJECT_DIR$/commands/weather.js" />
-      <change beforePath="$PROJECT_DIR$/commands/website.js" afterPath="$PROJECT_DIR$/commands/website.js" />
-      <change beforePath="$PROJECT_DIR$/config.json" afterPath="$PROJECT_DIR$/config.json" />
-      <change beforePath="$PROJECT_DIR$/twitch.js" afterPath="$PROJECT_DIR$/twitch.js" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,11 +14,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="twitch.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="twitch.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/twitch.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
+            <state relative-caret-position="151">
+              <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package-lock.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package-lock.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -60,6 +69,7 @@
         <option value="$PROJECT_DIR$/commands/weather.js" />
         <option value="$PROJECT_DIR$/commands/website.js" />
         <option value="$PROJECT_DIR$/twitch.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -230,12 +240,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1515764447128</updated>
-      <workItem from="1515764450090" duration="622000" />
+      <workItem from="1515764450090" duration="700000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="622000" />
+    <option name="totallyTimeSpent" value="700000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1036" extended-state="6" />
@@ -370,8 +380,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/twitch.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="34" column="29" lean-forward="true" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
+        <state relative-caret-position="151">
+          <caret line="11" column="31" lean-forward="true" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
           <folding />
         </state>
       </provider>
