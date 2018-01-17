@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 let twitch = require('./twitch.js');
 let fs = require('fs');
-let auth = require('./auth.json');
+const auth = require('./auth.js')();
 let config = require('./config.json');
 
 const SUPPORTED_STREAMERS = config.streamers;
