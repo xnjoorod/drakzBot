@@ -44,7 +44,7 @@ bot.on('ready', () => {
         const announce_channel = bot.channels.find('id', config.channel_announces);
         setInterval(
             () => {
-                live = twitch.checkTwitchStreams(SUPPORTED_STREAMERS, announce_channel, live);
+                live = twitch.checkTwitchStreams(SUPPORTED_STREAMERS, announce_channel, live, auth.twitch_clientId);
             },
             config.twitch_checktime * 1000
         );

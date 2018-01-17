@@ -1,10 +1,9 @@
 const Discord = require("discord.js");
 const https = require('https');
-let auth = require('./auth.json');
 
-function checkTwitchStreams(streamers, channel, liveStatus) {
+function checkTwitchStreams(streamers, channel, liveStatus, clientId) {
     streamers.forEach((name) => {
-        https.get(`https://api.twitch.tv/kraken/streams/${name}?client_id=${auth.twitch_clientId}`, res => {
+        https.get(`https://api.twitch.tv/kraken/streams/${name}?client_id=${auth.clientId}`, res => {
             let body = '';
             res
                 .on('data', chunk => body += chunk)
