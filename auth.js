@@ -2,7 +2,8 @@ const fs = require('fs')
 
 module.exports = () => {
 	const isProduction =
-		process.env.hasOwnProperty('BOT_TOKEN') && process.env.hasOwnProperty('TWITCH_CLIENT_ID')
+		process.env.hasOwnProperty('BOT_TOKEN') &&
+		process.env.hasOwnProperty('TWITCH_CLIENT_ID')
 	const authExists = fs.existsSync('./auth.json')
 
 	var token, twitchClientID

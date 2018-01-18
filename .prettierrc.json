@@ -1,9 +1,9 @@
 {
-	"printWidth": 100,
+	"printWidth": 60,
 	"parser": "babylon",
 	"singleQuote": true,
 	"bracketSpacing": false,
-	"tabWidth": 1,
 	"semi": false,
-	"useTabs": true
+	"useTabs": true,
+	"tabWidth": 2
 }

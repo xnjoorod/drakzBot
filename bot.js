@@ -19,7 +19,9 @@ bot.aliases = new Discord.Collection()
 fs.readdir('./commands/', (err, files) => {
 	if (err) console.error(err)
 
-	let jsfiles = files.filter(f => f.split('.').pop() === 'js')
+	let jsfiles = files.filter(
+		f => f.split('.').pop() === 'js'
+	)
 	if (jsfiles.length <= 0) {
 		return console.log('0 commands loaded.')
 	} else {
@@ -39,9 +41,13 @@ bot.on('ready', () => {
 	console.log(`Connected!\nLogged in as ${bot.user.tag}!`)
 	bot.user.setGame('www.drakz.pt')
 
-	const twitchOnline = config.twitch_enabled && auth.twitch_clientId !== ''
+	const twitchOnline =
+		config.twitch_enabled && auth.twitch_clientId !== ''
 	if (twitchOnline && config.channel_announces !== 0) {
-		const announce_channel = bot.channels.find('id', config.channel_announces)
+		const announce_channel = bot.channels.find(
+			'id',
+			config.channel_announces
+		)
 		setInterval(() => {
 			live = twitch.checkTwitchStreams(
 				SUPPORTED_STREAMERS,
@@ -73,8 +79,10 @@ bot.on('message', message => {
 	if (!msg.startsWith(prefix)) return
 
 	let cmd
-	if (bot.commands.has(cont[0])) cmd = bot.commands.get(cont[0])
-	else if (bot.aliases.has(cont[0])) cmd = bot.aliases.get(cont[0])
+	if (bot.commands.has(cont[0]))
+		cmd = bot.commands.get(cont[0])
+	else if (bot.aliases.has(cont[0]))
+		cmd = bot.aliases.get(cont[0])
 
 	if (cmd) cmd.run(bot, message, args)
 })

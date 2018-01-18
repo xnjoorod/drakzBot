@@ -10,10 +10,14 @@ module.exports.run = async (bot, message, args) => {
 				.setDescription(json.definition)
 				.setURL(json.permalink)
 				.setColor(3447003)
-				.setFooter('Powered by Urban Dictionary - João Rodrigues © 2018')
+				.setFooter(
+					'Powered by Urban Dictionary - João Rodrigues © 2018'
+				)
 			message.channel.send({embed})
 		} else {
-			message.channel.send('Esta palavra não está no Urban Dictionary. Tente novamente mais tarde.')
+			message.channel.send(
+				'Esta palavra não está no Urban Dictionary. Tente novamente mais tarde.'
+			)
 		}
 	})
 }
@@ -21,5 +25,6 @@ module.exports.run = async (bot, message, args) => {
 module.exports.config = {
 	command: 'urban',
 	alias: 'urbandictionary',
-	description: 'Know now the meaning of a word on Urban Dictionary!'
+	description:
+		'Know now the meaning of a word on Urban Dictionary!'
 }
