@@ -1,77 +1,86 @@
-const Discord = require('discord.js')
-const https = require('https')
+const Discord = require('discord.js'),
+	https = require('https'),
+	logger = require('./logger.js')()
 
-function checkTwitchStreams(
-	streamers,
+const {
+	STREAMER_LIVE,
+	STREAMER_NOT_LIVE
+} = require('./constants')
+
+module.exports.renderLiveStreams = function(
+	clientId,
 	channel,
-	liveStatus,
-	clientId
+	cache,
+	streamers
 ) {
-	streamers.forEach(name => {
-		https
-			.get(
-				`https://api.twitch.tv/kraken/streams/${name}?client_id=${clientId}`,
-				res => {
-					let body = ''
-					res
-						.on('data', chunk => (body += chunk))
-						.on('end', () => {
-							let result
-							try {
-								result = JSON.parse(body)
-							} catch (e) {
-								result = false
-								console.log(e)
-							}
-							if (result) {
-								if (result.stream !== null) {
-									if (liveStatus[name] === 0) {
-										if (
-											result.stream.channel.display_name !==
-											null
-										) {
-											const embed = new Discord.RichEmbed()
-												.setTitle(
-													'O streamer ' +
-														result.stream.channel
-															.display_name +
-														' acabou de entrar em direto na Twitch!'
-												)
-												.setDescription(
-													'Acompanha já a transmissão em direto!'
-												)
-												.setThumbnail(
-													result.stream.preview.small
-												)
-												.addField(
-													'Título',
-													result.stream.channel.status,
-													true
-												)
-												.addField(
-													'Viewers: ',
-													result.stream.viewers,
-													true
-												)
-												.setURL(
-													'https://www.twitch.tv/' +
-														result.stream.channel
-															.display_name
-												)
-												.setColor('#6034b1')
-												.setFooter('João Rodrigues © 2018')
-											channel.send({embed})
-											liveStatus[name] = 1
-										}
-									}
-								}
-							}
-						})
-				}
-			)
-			.on('error', e => console.log('Erro: ', e.message))
-	})
-	return liveStatus
+	const activeStreams = getActiveStreams(
+		clientId,
+		cache,
+		streamers
+	)
+	activeStreams.forEach(stream =>
+		renderLiveStream(channel, stream)
+	)
 }
 
-module.exports.checkTwitchStreams = checkTwitchStreams
+function renderLiveStream(channel, stream) {
+	// TODO: the following constants need
+	// to be refactored into localizable strings
+
+	const title = `O streamer ${
+		stream.channel.display_name
+	} acabou de entrar em direto na Twitch!`
+
+	const description =
+		'Acompanha já a transmissão em direto!'
+
+	const url = `https://www.twitch.tv/${
+		stream.channel.display_name
+	}`
+
+	const titleField = 'Título'
+	const viewersField = 'Viewers: '
+
+	const embed = new Discord.RichEmbed()
+		.setTitle(title)
+		.setDescription(description)
+		.setThumbnail(stream.preview.small)
+		.addField(titleField, stream.channel.status, true)
+		.addField(viewersField, stream.viewers, true)
+		.setURL(url)
+		.setColor('#6034b1')
+		.setFooter('João Rodrigues © 2018')
+
+	channel.send({embed})
+}
+
+function getActiveStreams(clientId, cache, streamers) {
+	let activeStreamers = []
+
+	streamers.forEach(name => {
+		const url = `https://api.twitch.tv/kraken/streams/${name}?client_id=${clientId}`
+		https
+			.get(url, res => {
+				res.on('data', body => {
+					const payload = JSON.parse(body)
+					const isLive =
+						payload.stream &&
+						payload.stream.channel.display_name &&
+						cache.get(name) === STREAMER_NOT_LIVE
+
+					if (isLive) {
+						activeStreamers.push(payload.stream)
+						cache.set(name, STREAMER_LIVE)
+						logger.debug(`Streamer ${name} is live`)
+					}
+				})
+			})
+			.on('error', err => parseError(err))
+	})
+
+	return activeStreamers
+}
+
+function parseError(err) {
+	logger.error('Error while using Twitch API:', err.message)
+}

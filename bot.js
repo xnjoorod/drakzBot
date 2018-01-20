@@ -1,44 +1,55 @@
-const Discord = require('discord.js')
-let twitch = require('./twitch.js')
-let fs = require('fs')
-const auth = require('./auth.js')()
-let config = require('./config.json')
+const Discord = require('discord.js'),
+	twitch2 = require('./twitch.js'),
+	fs = require('fs'),
+	auth = require('./auth.js')(),
+	config = require('./config.json'),
+	logger = require('./logger.js')(),
+	cache = require('./cache.js')(100, 10)
 
-const SUPPORTED_STREAMERS = config.streamers
+const {STREAMER_NOT_LIVE} = require('./constants')
 
-let live = {
-	pedropcruz: 0,
-	drakzOfficial: 0,
-	ExilePT: 0
-}
+// once key is expired set it to be 0 (not live)
+cache.on('expired', function(key, value) {
+	if (value !== STREAMER_NOT_LIVE) {
+		cache.set(key, STREAMER_NOT_LIVE)
+	}
+})
+
+config.streamers.forEach(streamer => {
+	cache.set(streamer, 0)
+})
 
 let bot = new Discord.Client()
 bot.commands = new Discord.Collection()
 bot.aliases = new Discord.Collection()
 
 fs.readdir('./commands/', (err, files) => {
-	if (err) console.error(err)
+	if (err) {
+		logger.error(err)
+		return
+	}
 
 	let jsfiles = files.filter(
 		f => f.split('.').pop() === 'js'
 	)
+
+	logger.debug(`${jsfiles.length} commands loaded`)
 	if (jsfiles.length <= 0) {
-		return console.log('0 commands loaded.')
-	} else {
-		console.log(jsfiles.length + ' commands loaded.')
+		return
 	}
 
 	jsfiles.forEach(f => {
 		let cmds = require(`./commands/${f}`)
-		console.log(`Command ${f} loaded.`)
+		logger.debug(`Command ${f} loaded.`)
 		bot.commands.set(cmds.config.command, cmds)
 		bot.aliases.set(cmds.config.alias, cmds)
 	})
 })
 
 bot.login(auth.token)
+
 bot.on('ready', () => {
-	console.log(`Connected!\nLogged in as ${bot.user.tag}!`)
+	logger.debug(`Logged in as ${bot.user.tag}!`)
 	bot.user.setGame('www.drakz.pt')
 
 	const twitchOnline =
@@ -48,35 +59,44 @@ bot.on('ready', () => {
 			'id',
 			config.channel_announces
 		)
-		setInterval(() => {
-			live = twitch.checkTwitchStreams(
-				SUPPORTED_STREAMERS,
-				announce_channel,
-				live,
-				auth.twitch_clientId
-			)
-		}, config.twitch_checktime * 1000)
+
+		// assign new function with already bound parameters
+		let renderLiveStreams = twitch2.renderLiveStreams.bind(
+			null,
+			auth.twitch_clientId,
+			announce_channel,
+			cache,
+			config.streamers
+		)
+
+		setInterval(
+			renderLiveStreams,
+			config.twitch_checktime * 1000
+		)
 	}
 })
+
+const prefix = config.command_prefix
 
 bot.on('message', message => {
 	if (message.author.bot) return
 
-	let prefix = config.command_prefix
-	// let sender = message.author
 	let msg = message.content.toLowerCase()
-	let cont = message.content.slice(prefix.length).split(' ')
-	let args = cont.slice(1)
 
 	if (msg === 'poop') {
 		message.channel.send(':poop:')
+		return
 	}
 
 	if (msg.startsWith('hey drakzbot')) {
 		message.reply('hey!')
+		return
 	}
 
 	if (!msg.startsWith(prefix)) return
+
+	let cont = message.content.slice(prefix.length).split(' ')
+	let args = cont.slice(1)
 
 	let cmd
 	if (bot.commands.has(cont[0]))
