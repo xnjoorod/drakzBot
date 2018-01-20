@@ -13,7 +13,6 @@
 		"module": true,
 		"process": true,
 		"Exception": true,
-		"console": true,
 		"setInterval": true
 	},
 	"extends": "eslint:recommended",
