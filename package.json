@@ -15,6 +15,7 @@
 		"erlpack": "github:hammerandchisel/erlpack",
 		"ffmpeg-binaries": "^3.2.2-3",
 		"libsodium-wrappers": "^0.5.4",
+		"mathjs": "^3.20.1",
 		"node-cache": "^4.1.1",
 		"node-opus": "^0.2.7",
 		"opusscript": "0.0.3",
