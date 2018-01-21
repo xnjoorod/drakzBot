@@ -51,16 +51,19 @@ function renderLiveStreams(
 		https
 			.get(url, res => {
 				res.on('data', body => {
+					const streamerStatus = cache.get(name)
 					const payload = JSON.parse(body)
 					const isLive =
 						payload.stream &&
 						payload.stream.channel.display_name &&
-						cache.get(name) === STREAMER_NOT_LIVE
+						streamerStatus === STREAMER_NOT_LIVE
 
 					if (isLive) {
 						cache.set(name, STREAMER_LIVE)
-						logger.debug(`Streamer ${name} is live`)
 						render(channel, payload.stream)
+						logger.debug(`Streamer ${name} is live`)
+					} else if (streamerStatus !== STREAMER_NOT_LIVE) {
+						cache.set(name, STREAMER_NOT_LIVE)
 					}
 				})
 			})
