@@ -16,7 +16,7 @@ cache.on('expired', function(key, value) {
 })
 
 config.streamers.forEach(streamer => {
-	cache.set(streamer, 0)
+	cache.set(streamer, STREAMER_NOT_LIVE)
 })
 
 let bot = new Discord.Client()

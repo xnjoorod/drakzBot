@@ -1,4 +1,3 @@
 /* eslint-disable */
-
-const STREAMER_NOT_LIVE = 0
-const STREAMER_LIVE = 1
+module.exports.STREAMER_NOT_LIVE = 0
+module.exports.STREAMER_LIVE = 1
