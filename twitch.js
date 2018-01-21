@@ -7,23 +7,9 @@ const {
 	STREAMER_NOT_LIVE
 } = require('./constants')
 
-module.exports.renderLiveStreams = function(
-	clientId,
-	channel,
-	cache,
-	streamers
-) {
-	const activeStreams = getActiveStreams(
-		clientId,
-		cache,
-		streamers
-	)
-	activeStreams.forEach(stream =>
-		renderLiveStream(channel, stream)
-	)
-}
+module.exports.renderLiveStreams = renderLiveStreams
 
-function renderLiveStream(channel, stream) {
+function render(channel, stream) {
 	// TODO: the following constants need
 	// to be refactored into localizable strings
 
@@ -54,9 +40,12 @@ function renderLiveStream(channel, stream) {
 	channel.send({embed})
 }
 
-function getActiveStreams(clientId, cache, streamers) {
-	let activeStreamers = []
-
+function renderLiveStreams(
+	clientId,
+	channel,
+	cache,
+	streamers
+) {
 	streamers.forEach(name => {
 		const url = `https://api.twitch.tv/kraken/streams/${name}?client_id=${clientId}`
 		https
@@ -69,16 +58,14 @@ function getActiveStreams(clientId, cache, streamers) {
 						cache.get(name) === STREAMER_NOT_LIVE
 
 					if (isLive) {
-						activeStreamers.push(payload.stream)
 						cache.set(name, STREAMER_LIVE)
 						logger.debug(`Streamer ${name} is live`)
+						render(channel, payload.stream)
 					}
 				})
 			})
 			.on('error', err => parseError(err))
 	})
-
-	return activeStreamers
 }
 
 function parseError(err) {
