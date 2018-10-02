@@ -1,0 +1,33 @@
+{
+	"env": {
+		"browser": false,
+		"es6": true,
+		"node": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 8
+	},
+	"plugins": ["prettier"],
+	"globals": {
+		"require": true,
+		"module": true,
+		"process": true,
+		"Exception": true,
+		"setInterval": true
+	},
+	"extends": "eslint:recommended",
+	"rules": {
+		"prettier/prettier": "error",
+		"indent": ["error", "tab"],
+		"linebreak-style": ["error", "unix"],
+		"semi": ["error", "never"],
+		"no-console": ["off"],
+		"generator-star-spacing": [
+			"error",
+			{
+				"before": true,
+				"after": false
+			}
+		]
+	}
+}
