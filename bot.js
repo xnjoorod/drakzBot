@@ -46,7 +46,7 @@ fs.readdir('./commands/', (err, files) => {
 	})
 })
 
-bot.login(auth.token)
+bot.login(auth.token).catch((erro) => { logger.debug(erro); });
 
 bot.on('ready', () => {
 	logger.debug(`Logged in as ${bot.user.tag}!`)

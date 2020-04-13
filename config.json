@@ -3,5 +3,5 @@
 	"twitch_enabled": false,
 	"twitch_checktime": 10,
 	"channel_announces": "",
-	"streamers": ["pedropcruz", "drakzofficial", "ExilePT"]
+	"streamers": ["drakzofficial"]
 }

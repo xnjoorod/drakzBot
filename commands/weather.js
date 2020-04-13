@@ -21,7 +21,7 @@ module.exports.run = async (bot, message, args) => {
 			var location = result[0].location // This is a variable for the location part of the JSON output
 
 			// Let's use an embed for this.
-			const embed = new Discord.RichEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setDescription(`**${current.skytext}**`) // This is the text of what the sky looks like, remember you can find all of this on the weather-js npm page.
 				.setAuthor(
 					`Meteorologia para ${current.observationpoint}`
@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args) => {
 				.addField('Humidade', `${current.humidity}%`, true)
 
 			// Now, let's display it when called
-			message.channel.send({embed})
+			message.channel.send({embed}).catch((error) => { message.channel.send(`Ocorreu um erro: ${error}`); });
 		}
 	)
 }

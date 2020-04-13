@@ -21,7 +21,7 @@ module.exports.run = async (bot, message) => {
 			'.'
 	)
 	message.channel.send(
-		'Estou a correr o Windows 10 (17763) e estou na versão ' +
+		'Estou a correr o Debian 10 (Raspbian - r1911 arm64) e estou na versão ' +
 			packageJson.version
 	)
 }

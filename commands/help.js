@@ -4,7 +4,7 @@ let config = require('../config.json')
 module.exports.run = async (bot, message) => {
 	var msg = message.content.toLowerCase()
 	if (msg === 'd!ajuda' || msg === 'd!help') {
-		const embed = new Discord.RichEmbed()
+		const embed = new Discord.MessageEmbed()
 			.setTitle('drakzBot - Help')
 			.setDescription(
 				'You can check what commands I can do below!'

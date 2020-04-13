@@ -1,13 +1,13 @@
 const Discord = require('discord.js')
-const api = 'http://random.cat/meow'
-const snekfetch = require('snekfetch')
+const api = 'http://aws.random.cat/meow'
+const fetch = require('node-fetch')
 
 module.exports.run = async (bot, message) => {
-	snekfetch.get(api).then(r => {
-		const embed = new Discord.RichEmbed()
+	fetch(api, {method:'GET'}).then(r => {
+		const embed = new Discord.MessageEmbed()
 			.setImage(r.body.file)
 			.setFooter('Olha um gato aleatório só para ti!')
-		message.channel.send({embed})
+		message.channel.send({embed}).catch((error) => { message.channel.send(`Ocorreu um erro: ${error}`); });
 	})
 }
 
